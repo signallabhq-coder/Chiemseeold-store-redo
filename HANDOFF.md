@@ -8,6 +8,12 @@ chiemsee.com is the data source). German UI. Sibling of the Chiemsee × Join the
 top strip and one footer link, otherwise independent. Design bar: **Arket** (measured in `bar.md`), i.e. Acne-grade
 restraint at Chiemsee's price points. Rules: `design-system.md` (the System critic judges against it).
 
+## Repository
+`https://github.com/signallabhq-coder/Chiemseeold-store-redo` (branch `main`). The working copy here is the origin
+clone. `node_modules`, `dist` and `renders/` are gitignored: run `npm ci && npm run build` after a fresh clone, and
+re-shoot renders with `tools/shoot-flows.mjs`. Verified 2026-09-10 by cloning fresh, building and passing
+`tools/smoke.mjs` (19 checks).
+
 ## Run
 - Preview tool: `preview_start` name **`chiemsee-store`** (in `~\.claude\.claude\launch.json`, port **5191**, strictPort).
 - Shell: `cd chiemsee-store && npm run dev` (Vite, port 5191). Build: `npm run build` → `dist/`.
