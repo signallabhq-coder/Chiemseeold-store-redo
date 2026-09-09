@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+tools/node_modules/
+
+# build output (run `npm run build` to regenerate)
+dist/
+
+# design-loop screenshots: ~1.3 GB of round-by-round critic renders, kept locally only.
+# bar.md and design-system.md carry the written record; re-shoot with tools/shoot-flows.mjs.
+renders/
+
+# logs and scratch
+*.log
+.DS_Store
+Thumbs.db

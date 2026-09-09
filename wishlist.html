@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merkliste · Chiemsee</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preload" href="/fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/styles/chrome.css">
+  <link rel="stylesheet" href="/src/styles/commerce.css">
+</head>
+<body>
+  <div id="chrome-top"></div>
+  <main id="main">
+    <section class="page-head"><h1 class="t-l">Merkliste <span class="muted" data-n></span></h1><p>Gemerkte Teile bleiben in diesem Browser gespeichert.</p></section>
+    <section class="grid" data-grid aria-label="Gemerkte Produkte"></section>
+    <div class="col empty-state" data-empty hidden>
+      <p class="t-l">Noch nichts gemerkt.</p>
+      <p class="muted">Das Herz auf jedem Produkt legt es hier ab.</p>
+      <a class="btn btn-fill" href="/shop.html">Zum Shop</a>
+    </div>
+  </main>
+  <div id="chrome-bottom"></div>
+  <script type="module">
+    import { loadCatalog, mountChrome, Wish } from '/src/js/store.js';
+    import { tileHTML, bindTiles, alignCaptions } from '/src/js/tile.js';
+    import { mountSearch } from '/src/js/search.js';
+    mountChrome(); mountSearch(); bindTiles();
+    loadCatalog().then((c) => {
+      const render = () => { const ids = Wish.items(); const list = ids.map((id) => c.find((p) => p.id === id)).filter(Boolean);
+        document.querySelector('[data-n]').textContent = list.length ? `(${list.length})` : '';
+        document.querySelector('[data-grid]').innerHTML = list.map((p) => tileHTML(p)).join(''); alignCaptions(); document.querySelector('[data-empty]').hidden = !!list.length; };
+      render(); window.addEventListener('store:change', render);
+    });
+  </script>
+</body>
+</html>

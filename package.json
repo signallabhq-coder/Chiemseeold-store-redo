@@ -1,0 +1,14 @@
+{
+  "name": "chiemsee-store",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5191 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 5191 --strictPort"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

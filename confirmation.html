@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bestellung · Chiemsee</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preload" href="/fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/styles/chrome.css">
+  <link rel="stylesheet" href="/src/styles/commerce.css">
+</head>
+<body>
+  <div id="chrome-top"></div>
+  <main id="main" class="confirm" data-confirm>
+    <p class="t-s num" data-num></p>
+    <h1 class="t-l">Danke. Deine Bestellung ist da.</h1>
+    <p data-lead></p>
+    <div class="mini-lines" data-mini></div>
+    <div class="summary"><div class="row"><span>Zwischensumme</span><span data-sub></span></div><div class="row"><span>Versand</span><span data-ship></span></div><div class="row total"><span>Gesamt</span><span data-total></span></div></div>
+    <p class="t-s legal">Prototyp. Es wurde keine echte Bestellung ausgelöst und keine Zahlung eingezogen.</p>
+    <a class="btn btn-fill" href="/shop.html">Weiter einkaufen</a>
+  </main>
+  <div id="chrome-bottom"></div>
+  <script type="module">
+    import { mountChrome, fmt, esc } from '/src/js/store.js';
+    import { mountSearch } from '/src/js/search.js';
+    mountChrome(); mountSearch();
+    let o = null; try { o = JSON.parse(sessionStorage.getItem('chiemsee-store-order')); } catch {}
+    const $ = (s) => document.querySelector(s);
+    if (!o) { $('h1').textContent = 'Keine Bestellung gefunden.'; $('[data-lead]').textContent = 'Der Warenkorb wartet.'; }
+    else {
+      $('[data-num]').textContent = `Bestellnummer ${o.number}`;
+      $('[data-lead]').textContent = `Bestellbestätigung für ${o.email} (im Prototyp wird keine E-Mail versendet). Lieferung an ${o.name}, ${o.address}. Zahlung per ${o.pay}.`;
+      $('[data-mini]').innerHTML = o.items.map((i) => `<div class="ml"><img src="${esc(i.thumb)}" alt=""><div><span class="upper">${esc(i.name)}</span><span class="muted t-s">${esc(i.color)}${i.size !== 'Einheitsgröße' ? ` · ${esc(i.size)}` : ''} · ${i.qty} Stk.</span></div><span>${fmt(i.price * i.qty)}</span></div>`).join('');
+      $('[data-sub]').textContent = fmt(o.sub); $('[data-ship]').textContent = o.ship ? fmt(o.ship) : 'Kostenlos'; $('[data-total]').textContent = fmt(o.total);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chiemsee Online Shop</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preload" href="/fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/styles/chrome.css">
+  <link rel="stylesheet" href="/src/styles/product.css">
+</head>
+<body>
+  <div id="chrome-top"></div>
+  <main id="main">
+    <nav class="crumbs t-s" aria-label="Pfad" data-crumbs></nav>
+    <article class="pdp" data-pdp>
+      <div class="pdp-media" data-media></div>
+      <p class="t-s muted pdp-counter" data-counter hidden>1 / 4</p>
+      <div class="pdp-side">
+        <div class="pdp-info">
+          <div class="pdp-head">
+            <h1 class="t-l upper" data-name></h1>
+            <p class="pdp-price t-l" data-price></p>
+          </div>
+          <div class="pdp-colors">
+            <div class="swatch-row" data-swatches></div>
+            <p class="t-m" data-color></p>
+          </div>
+          <div class="pdp-sizes">
+            <div class="size-head"><span class="t-s muted">Größe</span><a class="t-s" href="#groessen">Größentabelle</a></div>
+            <div class="size-grid" data-sizes role="radiogroup" aria-label="Größe"></div>
+            <p class="t-s hint" data-size-hint role="alert">Bitte Größe wählen.</p>
+          </div>
+          <div class="pdp-buy">
+            <button type="button" class="btn btn-fill pdp-add" data-add>In den Warenkorb</button>
+            <button type="button" class="pdp-wish" data-pdp-wish aria-label="Zur Merkliste" aria-pressed="false"></button>
+          </div>
+          <div class="acc" data-acc></div>
+        </div>
+      </div>
+    </article>
+    <section class="row-sec related" aria-labelledby="h-rel">
+      <div class="row-head"><h2 class="t-l" id="h-rel">Passt dazu</h2></div>
+      <div class="grid" data-related></div>
+    </section>
+  </main>
+  <div id="chrome-bottom"></div>
+  <script type="module" src="/src/js/product.js"></script>
+</body>
+</html>

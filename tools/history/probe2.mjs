@@ -1,0 +1,11 @@
+import puppeteer from 'puppeteer-core';
+const b = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+const p = await b.newPage(); await p.setViewport({ width: 1440, height: 900 });
+p.on('pageerror', e => console.log('PAGEERROR', e.message)); p.on('console', m => { if (m.type()==='error' && !/favicon/.test(m.text())) console.log('CONSOLE', m.text()); });
+await p.goto('http://localhost:5191/product.html?id=3326307&c=hydro', { waitUntil: 'networkidle0' }); await new Promise(r => setTimeout(r, 800));
+console.log('url', p.url(), 'add?', !!(await p.$('[data-add]')), 'sizes', await p.$$eval('[data-sizes] button', b => b.map(x => x.dataset.size)));
+await p.click('[data-add]'); await new Promise(r => setTimeout(r, 500));
+console.log('after hint: url', p.url(), 'add?', !!(await p.$('[data-add]')), 'hint hidden', await p.$eval('[data-size-hint]', e => e.hidden));
+await p.click('[data-sizes] button[data-size="L"]'); await new Promise(r => setTimeout(r, 500));
+console.log('after L: url', p.url(), 'add?', !!(await p.$('[data-add]')), 'checked', await p.$$eval('[data-sizes] button[aria-checked="true"]', b => b.map(x => x.dataset.size)));
+await b.close();
