@@ -32,13 +32,13 @@ export const swatchColor = (v) => v.swatch || SWATCH[(v.color || '').toLowerCase
 export const shortName = (n) => n.replace(/\b(Comfort|Loose|Slim|Regular|Tight)-Fit\s+/gi, '').replace(/^(Funktionale[rs]?|Einfarbige[rs]?|Unifarbene[rs]?|Unifarbende[rs]?|Unisex)\s+/i, '').replace(/^(Funktionale[rs]?|Einfarbige[rs]?|Unifarbene[rs]?|Unifarbende[rs]?|Unisex)\s+/i, '').replace(/^./, (c) => c.toUpperCase());
 export const fmt = (n) => (n == null ? '' : n.toFixed(2).replace('.', ',') + ' €');
 export const slug = (s) => s.toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-export const productUrl = (p, v) => `/product.html?id=${p.id}${v ? `&c=${v.slug}` : ''}`;
+export const productUrl = (p, v) => `product.html?id=${p.id}${v ? `&c=${v.slug}` : ''}`;
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 let _catalog;
 export async function loadCatalog() {
   if (_catalog) return _catalog;
-  const res = await fetch('/data/catalog.json');
+  const res = await fetch('data/catalog.json');
   const data = await res.json();
   _catalog = data.products.map((p) => ({ ...p, variants: p.variants.map((v) => ({ ...v, thumbs: v.images.map((i) => i.replace(/\.jpg$/, '.thumb.jpg')) })) }));
   return _catalog;
@@ -79,7 +79,7 @@ export const Wish = {
 };
 
 // ---- chrome ----
-const badge = '/assets/badge-ink-160.png';
+const badge = 'assets/badge-ink-160.png';
 const HEADER = (active) => `
 <a class="skip" href="#main">Zum Inhalt</a>
 <div class="strip" role="region" aria-label="Hinweis">
@@ -87,14 +87,14 @@ const HEADER = (active) => `
 </div>
 <header class="hdr">
   <nav class="hdr-nav" aria-label="Kategorien">
-    ${CATS.map((c) => `<a href="/shop.html?cat=${c.key}" ${active === c.key ? 'aria-current="page"' : ''}>${c.label}</a>`).join('')}
+    ${CATS.map((c) => `<a href="shop.html?cat=${c.key}" ${active === c.key ? 'aria-current="page"' : ''}>${c.label}</a>`).join('')}
   </nav>
-  <a class="wordmark" href="/index.html" aria-label="Chiemsee Startseite">
+  <a class="wordmark" href="index.html" aria-label="Chiemsee Startseite">
     <img src="${badge}" alt="" width="26" height="22"><span>Chiemsee</span>
   </a>
   <div class="hdr-utils">
     <button type="button" data-open="search">Suche</button>
-    <a href="/wishlist.html">Merkliste<span data-wish-count hidden></span></a>
+    <a href="wishlist.html">Merkliste<span data-wish-count hidden></span></a>
     <button type="button" data-open="bag">Warenkorb <span data-bag-count>(0)</span></button>
   </div>
   <div class="hdr-mobile"><button type="button" data-open="search">Suche</button><button type="button" data-open="bag">Warenkorb <span data-bag-count>(0)</span></button><button type="button" class="hdr-burger" data-open="menu" aria-label="Menü öffnen">Menü</button></div>
@@ -105,7 +105,7 @@ const FOOTER = `
   <div class="ftr-cols">
     <div><img src="${badge}" alt="Chiemsee Jumper, das Markenzeichen: ein springender Windsurfer" width="52" height="45"></div>
     <div><h2 class="t-s">Hilfe</h2><a href="#versand">Versand &amp; Lieferung</a><a href="#retoure">Rückgabe &amp; Umtausch</a><a href="#groessen">Größentabelle</a><a href="#kontakt">Kontakt</a></div>
-    <div><h2 class="t-s">Über Chiemsee</h2><a href="/ueber-chiemsee.html">Seit 1982 am Wasser</a><a href="/ueber-chiemsee.html#team">Team</a><a href="/ueber-chiemsee.html#verantwortung">Verantwortung</a><a href="#stores">Stores</a></div>
+    <div><h2 class="t-s">Über Chiemsee</h2><a href="ueber-chiemsee.html">Seit 1982 am Wasser</a><a href="ueber-chiemsee.html#team">Team</a><a href="ueber-chiemsee.html#verantwortung">Verantwortung</a><a href="#stores">Stores</a></div>
     <div><h2 class="t-s">Rechtliches</h2><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a><a href="#agb">AGB</a><a href="#widerruf">Widerruf</a></div>
     <div><h2 class="t-s">Join the Ride</h2><a href="${JTR_URL}" rel="noopener">Die neue Kollektion</a></div>
   </div>
@@ -120,13 +120,13 @@ const FOOTER = `
     <div class="row"><span>Versand</span><span data-bag-ship>Kostenlos</span></div>
     <div class="row total"><span>Gesamt</span><span data-bag-total>0,00 €</span></div>
     <p class="t-s muted">inkl. MwSt. · Kostenloser Versand ab 80 €</p>
-    <a class="btn btn-fill" href="/checkout.html">Zur Kasse</a>
-    <a class="btn btn-line" href="/bag.html">Warenkorb ansehen</a>
+    <a class="btn btn-fill" href="checkout.html">Zur Kasse</a>
+    <a class="btn btn-line" href="bag.html">Warenkorb ansehen</a>
   </div>
 </aside>
 <aside class="sheet sheet-menu" id="menu-sheet" aria-label="Menü" tabindex="-1" hidden>
   <div class="sheet-head"><span class="t-m upper">Menü</span><button type="button" data-close>Schließen</button></div>
-  <nav class="sheet-body menu-list">${CATS.map((c) => `<a href="/shop.html?cat=${c.key}">${c.label}</a>`).join('')}<a href="/wishlist.html">Merkliste</a><a href="/ueber-chiemsee.html">Über Chiemsee</a></nav>
+  <nav class="sheet-body menu-list">${CATS.map((c) => `<a href="shop.html?cat=${c.key}">${c.label}</a>`).join('')}<a href="wishlist.html">Merkliste</a><a href="ueber-chiemsee.html">Über Chiemsee</a></nav>
 </aside>`;
 
 export function mountChrome({ active } = {}) {

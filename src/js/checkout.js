@@ -34,5 +34,5 @@ form.addEventListener('submit', (e) => {
   const order = { number: 'CH-' + Date.now().toString(36).toUpperCase().slice(-7), items, sub, ship, total: sub + ship, pay: form.pay.value, shipMethod: form.ship.value, name: `${form.fn.value} ${form.ln.value}`, address: `${form.street.value}, ${form.zip.value} ${form.city.value}`, email: form.email.value, at: new Date().toISOString() };
   try { sessionStorage.setItem('chiemsee-store-order', JSON.stringify(order)); } catch {}
   Bag.clear();
-  location.href = '/confirmation.html';
+  location.href = 'confirmation.html';
 });

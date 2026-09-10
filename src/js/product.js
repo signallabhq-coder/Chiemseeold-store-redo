@@ -24,7 +24,7 @@ async function init() {
 function render() {
   const cat = p.gender === 'unisex' ? 'herren' : p.gender;
   document.title = `${p.name} · ${v.color} · Chiemsee`;
-  $('[data-crumbs]').innerHTML = `<a class="mid" href="/index.html">Chiemsee</a><span class="mid">/</span><a href="/shop.html?cat=${cat}">${genderLabel(cat)}</a><span>/</span><a href="/shop.html?cat=${cat}&type=${encodeURIComponent(p.type)}">${esc(p.type)}</a><span class="mid">/</span><span class="mid">${esc(p.name)}</span>`;
+  $('[data-crumbs]').innerHTML = `<a class="mid" href="index.html">Chiemsee</a><span class="mid">/</span><a href="shop.html?cat=${cat}">${genderLabel(cat)}</a><span>/</span><a href="shop.html?cat=${cat}&type=${encodeURIComponent(p.type)}">${esc(p.type)}</a><span class="mid">/</span><span class="mid">${esc(p.name)}</span>`;
   $('[data-media]').innerHTML = v.images.map((src, i) => `<figure><img src="${esc(src)}" alt="${esc(p.name)}, ${esc(v.color)}, Ansicht ${i + 1}" width="1200" height="1714" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></figure>`).join('');
   const counter = $('[data-counter]'); if (counter) { counter.textContent = `1 / ${v.images.length}`; counter.hidden = v.images.length < 2; const m = $('[data-media]'); m.onscroll = () => { counter.textContent = `${Math.round(m.scrollLeft / m.clientWidth) + 1} / ${v.images.length}`; }; }
   $('[data-name]').textContent = p.name;

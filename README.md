@@ -29,8 +29,15 @@ school or office firewall.
 
 ## Deploy
 
-`npm run build` produces a fully static `dist/`. Drop that on any static host. The sibling site runs on
-Cloudflare Pages; the same setup works here (build command `npm run build`, output directory `dist`).
+`npm run build` produces a fully static `dist/`. Every path it emits is relative (`base: './'`), so the same
+build works at a domain root **and** inside a subfolder.
+
+**GitHub Pages** is wired up: `.github/workflows/deploy-pages.yml` builds and publishes on every push to
+`main`. It needs one setting turned on once, in the repository under Settings -> Pages -> Source:
+"GitHub Actions". The site then lives at `https://signallabhq-coder.github.io/Chiemseeold-store-redo/`.
+
+Any other static host works too, with build command `npm run build` and output directory `dist` (the sibling
+JTR site runs on Cloudflare Pages).
 
 ## What's in it
 

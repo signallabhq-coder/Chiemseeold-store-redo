@@ -43,7 +43,7 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 def local(url, style):
-    return f"/assets/products/{style}/{url.split('/')[-1]}"
+    return f"assets/products/{style}/{url.split('/')[-1]}"
 
 products = []
 for fam in raw:

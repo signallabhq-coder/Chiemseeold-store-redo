@@ -36,7 +36,7 @@ export function mountSearch() {
     <div class="search-meta t-s muted" aria-live="polite"></div>
     <div class="search-quick"><span class="t-s muted">Beliebt</span>${POPULAR.map((w) => `<button type="button" class="t-m" data-q="${w}">${w}</button>`).join('')}</div>
     <div class="grid search-grid" data-results></div>
-    <section class="row-sec" data-fresh><div class="row-head"><h2 class="t-l">Neu eingetroffen</h2><a class="t-m" href="/shop.html">Alle ansehen</a></div><div class="grid" data-fresh-grid></div></section>`;
+    <section class="row-sec" data-fresh><div class="row-head"><h2 class="t-l">Neu eingetroffen</h2><a class="t-m" href="shop.html">Alle ansehen</a></div><div class="grid" data-fresh-grid></div></section>`;
   document.body.appendChild(el);
   const input = el.querySelector('input'), results = el.querySelector('[data-results]'), meta = el.querySelector('.search-meta'), quick = el.querySelector('.search-quick'), fresh = el.querySelector('[data-fresh]');
   let catalog, lastFocus, active = -1;

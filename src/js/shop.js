@@ -12,12 +12,12 @@ const INTRO = {
   all: ['Alle Produkte', 'Die aktuelle Chiemsee Kollektion für Damen, Herren und Kinder.'],
 };
 const EDITORIAL = {
-  damen: [{ src: '/assets/campaign/fall-women-hoodie.jpg', pos: '30% 30%', cap: 'Herbst am See' }, { src: '/assets/campaign/cat-women.jpg', pos: '50% 30%', cap: 'Auf der Piste' }],
-  herren: [{ src: '/assets/campaign/fall-men-troyer.jpg', pos: '38% 20%', cap: 'Troyer und Fleece' }, { src: '/assets/campaign/fall-men-fleece.jpg', pos: '50% 20%', cap: 'Sherpa Fleece' }],
-  kinder: [{ src: '/assets/campaign/cat-kids.webp', pos: '50% 50%', cap: 'Ab ins Wasser' }],
-  accessoires: [{ src: '/assets/campaign/fall-women-hoodie.jpg', pos: '30% 30%', cap: 'Beanies und Caps' }],
-  sale: [{ src: '/assets/campaign/heritage-windsurfer.jpg', pos: '50% 50%', cap: 'Archiv' }],
-  all: [{ src: '/assets/campaign/fall-men-troyer.jpg', pos: '38% 20%', cap: 'Herbst 2026' }, { src: '/assets/campaign/cat-women.jpg', pos: '50% 30%', cap: 'Auf der Piste' }],
+  damen: [{ src: 'assets/campaign/fall-women-hoodie.jpg', pos: '30% 30%', cap: 'Herbst am See' }, { src: 'assets/campaign/cat-women.jpg', pos: '50% 30%', cap: 'Auf der Piste' }],
+  herren: [{ src: 'assets/campaign/fall-men-troyer.jpg', pos: '38% 20%', cap: 'Troyer und Fleece' }, { src: 'assets/campaign/fall-men-fleece.jpg', pos: '50% 20%', cap: 'Sherpa Fleece' }],
+  kinder: [{ src: 'assets/campaign/cat-kids.webp', pos: '50% 50%', cap: 'Ab ins Wasser' }],
+  accessoires: [{ src: 'assets/campaign/fall-women-hoodie.jpg', pos: '30% 30%', cap: 'Beanies und Caps' }],
+  sale: [{ src: 'assets/campaign/heritage-windsurfer.jpg', pos: '50% 50%', cap: 'Archiv' }],
+  all: [{ src: 'assets/campaign/fall-men-troyer.jpg', pos: '38% 20%', cap: 'Herbst 2026' }, { src: 'assets/campaign/cat-women.jpg', pos: '50% 30%', cap: 'Auf der Piste' }],
 };
 const PRICE_BANDS = [['0-25', 'bis 25 €'], ['25-50', '25 bis 50 €'], ['50-100', '50 bis 100 €'], ['100-200', '100 bis 200 €'], ['200-9999', 'über 200 €']];
 const SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', '5XL', '6XL', 'S/M', 'L/XL', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '128', '140', '152', '164', '176', '35-38', '39-42', '43-46'];
@@ -68,7 +68,7 @@ function render() {
   const types = multi(p, 'type'), sizes = multi(p, 'size'), colors = multi(p, 'color'), prices = multi(p, 'price'), sale = p.get('sale') === '1', sort = p.get('sort') || 'new';
   document.title = `${title} · Chiemsee Online Shop`;
   $('[data-title]').textContent = title; $('[data-intro]').textContent = intro;
-  $('[data-crumbs]').innerHTML = `<a href="/index.html">Chiemsee</a><span>/</span>${cat === 'all' ? '<span>Shop</span>' : `<span>${esc(title)}</span>`}`;
+  $('[data-crumbs]').innerHTML = `<a href="index.html">Chiemsee</a><span>/</span>${cat === 'all' ? '<span>Shop</span>' : `<span>${esc(title)}</span>`}`;
   document.querySelectorAll('.hdr-nav a').forEach((a) => a.toggleAttribute('aria-current', a.getAttribute('href').endsWith(`cat=${cat}`)));
 
   const base = catalog.filter((x) => cat === 'all' || inCat(x, cat));
@@ -108,7 +108,7 @@ function render() {
   renderFilterForm(base, { types, sizes, colors, prices, sale });
 }
 
-const editorial = (e) => `<a class="tile-edit" href="/ueber-chiemsee.html" aria-label="${esc(e.cap)}"><img src="${e.src}" alt="" style="object-position:${e.pos}" loading="lazy"><span class="edit-cap t-s">${esc(e.cap)}</span></a>`;
+const editorial = (e) => `<a class="tile-edit" href="ueber-chiemsee.html" aria-label="${esc(e.cap)}"><img src="${e.src}" alt="" style="object-position:${e.pos}" loading="lazy"><span class="edit-cap t-s">${esc(e.cap)}</span></a>`;
 
 function renderFilterForm(base, st) {
   const f = $('[data-filter-form]');
