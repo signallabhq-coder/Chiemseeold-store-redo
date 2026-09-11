@@ -7,22 +7,55 @@
   <meta name="description" content="Chiemsee Online Shop. Sweatshirts, Fleece, Skibekleidung, Bademode und Accessoires für Damen, Herren und Kinder. Seit 1982 am Wasser.">
   <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="preload" href="./fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="./assets/campaign/hero-windsurfer-2880.jpg" as="image">
-  <script type="module" crossorigin src="./assets/main-BiMjZWeR.js"></script>
+  <link rel="preload" href="./assets/campaign/fall-women-hoodie.jpg" as="image">
+  <script type="module" crossorigin src="./assets/main-CAdMVhqs.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/search-Dn7CA41L.js">
   <link rel="stylesheet" crossorigin href="./assets/search-ip9YPQe9.css">
-  <link rel="stylesheet" crossorigin href="./assets/main-CS34eXjk.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-MjPOI4gC.css">
 </head>
 <body>
   <div id="chrome-top"></div>
   <main id="main">
-    <section class="hero" aria-label="Chiemsee, Boardsport seit 1982">
-      <img class="hero-img" src="./assets/campaign/hero-windsurfer-2880.jpg" alt="Windsurfer springt mit pinkem Segel durch die Gischt einer Welle" width="2880" height="1950" fetchpriority="high">
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="t-s">Chiemsee · Boardsport seit 1982</p>
-        <h1 class="t-hero">Urlaubsgefühl. Jeden Tag.</h1>
-        <a class="btn btn-paper" href="shop.html">Herbst 2026 entdecken</a>
+    <!-- chiemsee.com's campaign hero, carried over slide for slide. Their type
+         and colours, not the redesign's. The slider auto-advances. -->
+    <section class="cs-hero" aria-label="Chiemsee Kampagne" aria-roledescription="carousel" data-hero>
+      <h1 class="sr-only">Chiemsee · Boardsport seit 1982</h1>
+
+      <article class="cs-slide is-active" data-slide aria-roledescription="slide" aria-label="1 von 3">
+        <img src="./assets/campaign/fall-women-hoodie.jpg" alt="Frau in grauem Chiemsee Hoodie mit Kamera am Seeufer" width="1920" height="920" fetchpriority="high">
+        <div class="cs-copy">
+          <span class="cs-brand">Chiemsee</span>
+          <span class="cs-word">Fall Essentials</span>
+          <a class="cs-cta" href="shop.html">New in <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="cs-slide" data-slide aria-roledescription="slide" aria-label="2 von 3">
+        <img src="./assets/campaign/fall-men-troyer.jpg" alt="Mann im Chiemsee Troyer vor herbstlicher Landschaft" width="1920" height="920" loading="lazy">
+        <div class="cs-copy">
+          <span class="cs-brand">Chiemsee</span>
+          <span class="cs-word">Troyer</span>
+          <a class="cs-cta" href="shop.html?cat=herren&amp;type=Sweatshirts%20%26%20Hoodies">Shop now <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="cs-slide" data-slide data-tone="dark" aria-roledescription="slide" aria-label="3 von 3">
+        <img src="./assets/campaign/fall-men-fleece.jpg" alt="Mann in schwarzer Chiemsee Sherpa-Fleecejacke vor einer Holzhuette" width="1920" height="920" loading="lazy">
+        <div class="cs-copy">
+          <span class="cs-brand">Chiemsee</span>
+          <span class="cs-word">Fleece</span>
+          <a class="cs-cta" href="shop.html?cat=herren&amp;type=Fleece">Explore now <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <div class="cs-arrows">
+        <button type="button" data-prev aria-label="Vorheriger Slide">&larr;</button>
+        <button type="button" data-next aria-label="Naechster Slide">&rarr;</button>
+      </div>
+      <div class="cs-dots" data-dots>
+        <button type="button" class="is-active" data-dot="0" aria-label="Slide 1">01</button>
+        <button type="button" data-dot="1" aria-label="Slide 2">02</button>
+        <button type="button" data-dot="2" aria-label="Slide 3">03</button>
       </div>
     </section>
 
