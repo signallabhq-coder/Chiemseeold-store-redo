@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kasse · Chiemsee</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preload" href="./fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="module" crossorigin src="./assets/checkout-BUeur4Fo.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/search-Dn7CA41L.js">
+  <link rel="stylesheet" crossorigin href="./assets/search-ip9YPQe9.css">
+  <link rel="stylesheet" crossorigin href="./assets/commerce-D_DLE2TD.css">
+</head>
+<body>
+  <div id="chrome-top"></div>
+  <main id="main" class="col">
+    <h1 class="t-l">Kasse</h1>
+    <form class="two" data-form novalidate>
+      <div class="steps">
+        <section class="step" aria-labelledby="s1">
+          <h2 class="t-m" id="s1">1 · Lieferadresse</h2>
+          <div class="fields">
+            <div class="field"><label for="fn">Vorname</label><input id="fn" name="fn" required autocomplete="given-name"><span class="hint">&nbsp;</span></div>
+            <div class="field"><label for="ln">Nachname</label><input id="ln" name="ln" required autocomplete="family-name"><span class="hint">&nbsp;</span></div>
+            <div class="field span"><label for="street">Straße und Hausnummer</label><input id="street" name="street" required autocomplete="street-address"><span class="hint">&nbsp;</span></div>
+            <div class="field"><label for="zip">PLZ</label><input id="zip" name="zip" required inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code"><span class="hint">5 Ziffern</span></div>
+            <div class="field"><label for="city">Ort</label><input id="city" name="city" required autocomplete="address-level2"><span class="hint">&nbsp;</span></div>
+            <div class="field span"><label for="email">E-Mail</label><input id="email" name="email" type="email" required autocomplete="email"><span class="hint">Für die Bestellbestätigung</span></div>
+          </div>
+        </section>
+        <section class="step" aria-labelledby="s2">
+          <h2 class="t-m" id="s2">2 · Versand</h2>
+          <div class="radios" data-ship>
+            <label><input type="radio" name="ship" value="standard" checked><span>Standard</span><span class="desc">2 bis 4 Werktage</span><span class="right" data-ship-std></span></label>
+            <label><input type="radio" name="ship" value="express"><span>Express</span><span class="desc">1 bis 2 Werktage</span><span class="right">9,95 €</span></label>
+          </div>
+        </section>
+        <section class="step" aria-labelledby="s3">
+          <h2 class="t-m" id="s3">3 · Zahlung</h2>
+          <div class="radios">
+            <label><input type="radio" name="pay" value="PayPal" checked><span>PayPal</span><span class="desc">Weiterleitung nach der Bestellung</span></label>
+            <label><input type="radio" name="pay" value="Kreditkarte"><span>Kreditkarte</span><span class="desc">Visa, Mastercard, Amex</span></label>
+            <label><input type="radio" name="pay" value="Klarna"><span>Klarna</span><span class="desc">Rechnung oder Ratenkauf</span></label>
+            <label><input type="radio" name="pay" value="Rechnung"><span>Kauf auf Rechnung</span><span class="desc">Zahlbar innerhalb von 14 Tagen</span></label>
+          </div>
+          <p class="t-s legal">Prototyp: Es werden keine Zahlungsdaten abgefragt und keine echte Bestellung ausgelöst.</p>
+        </section>
+      </div>
+      <aside class="summary" aria-label="Bestellübersicht">
+        <h2 class="t-m upper">Bestellübersicht</h2>
+        <div class="mini-lines" data-mini></div>
+        <div class="row"><span>Zwischensumme</span><span data-sub></span></div>
+        <div class="row"><span>Versand</span><span data-ship-cost></span></div>
+        <div class="row total"><span>Gesamt</span><span data-total></span></div>
+        <p class="t-s note">inkl. MwSt.</p>
+        <button type="submit" class="btn btn-fill">Jetzt kaufen</button>
+        <p class="t-s legal">Mit der Bestellung akzeptierst du die <a href="#agb">AGB</a> und die <a href="#widerruf">Widerrufsbelehrung</a>.</p>
+      </aside>
+    </form>
+  </main>
+  <div id="chrome-bottom"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chiemsee Online Shop</title>
+  <meta name="description" content="Chiemsee Online Shop: Sweatshirts, Fleece, Skibekleidung, Bademode und Accessoires für Damen, Herren und Kinder.">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preload" href="./fonts/HankenGrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="module" crossorigin src="./assets/shop-BandiDQ1.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/search-Dn7CA41L.js">
+  <link rel="stylesheet" crossorigin href="./assets/search-ip9YPQe9.css">
+  <link rel="stylesheet" crossorigin href="./assets/shop-BL2Mp_hm.css">
+</head>
+<body>
+  <div id="chrome-top"></div>
+  <main id="main">
+    <nav class="crumbs t-s" aria-label="Pfad" data-crumbs></nav>
+    <section class="page-head">
+      <h1 class="t-l" data-title>Alle Produkte</h1>
+      <p data-intro></p>
+    </section>
+    <nav class="subnav" aria-label="Produkttyp" data-subnav></nav>
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button type="button" class="tb" data-open="filter">Filter <span class="plus" aria-hidden="true">+</span><span class="count" data-filter-count></span></button>
+        <div class="sort">
+          <label for="sort" class="sr-only">Sortieren</label>
+          <select id="sort" class="tb" data-sort>
+            <option value="new">Sortieren: Empfohlen</option>
+            <option value="newest">Sortieren: Neu</option>
+            <option value="price-asc">Sortieren: Preis aufsteigend</option>
+            <option value="price-desc">Sortieren: Preis absteigend</option>
+            <option value="name">Sortieren: Name A bis Z</option>
+          </select>
+        </div>
+        <div class="chips" data-active-filters></div>
+      </div>
+      <div data-count aria-live="polite"></div>
+    </div>
+    <section class="grid" data-grid aria-label="Produkte"></section>
+    <div class="none muted" data-none hidden>Keine Produkte für diese Auswahl. <button type="button" class="link t-m" data-reset>Filter zurücksetzen</button></div>
+  </main>
+  <div id="chrome-bottom"></div>
+
+  <aside class="sheet sheet-left" id="filter-sheet" aria-label="Filter" hidden>
+    <div class="sheet-head"><h2 class="t-m upper">Filter</h2><button type="button" data-close>Schließen</button></div>
+    <form class="sheet-body filters" data-filter-form></form>
+    <div class="sheet-foot">
+      <button type="button" class="btn btn-fill" data-apply>Anzeigen</button>
+      <button type="button" class="btn btn-line" data-reset>Zurücksetzen</button>
+    </div>
+  </aside>
+
+</body>
+</html>
