@@ -23,7 +23,7 @@ for (let i = 0; i < 40; i++) {
   try { await page.goto(base + '/index.html', { timeout: 3000 }); break; } catch { await new Promise((r) => setTimeout(r, 1000)); }
 }
 
-await go('/index.html');
+await go('/index.html?intro=0');
 check((await page.$$('[data-row="new"] .tile')).length >= 4, 'home: Neu row has products');
 check((await page.$$('[data-row="sale"] .tile')).length >= 4, 'home: Sale row has products');
 check((await page.$$('.entry')).length === 3, 'home: three category entries');
@@ -58,7 +58,7 @@ current = '/confirmation.html';
 check(/CH-/.test(await text('[data-num]') || ''), `confirmation: order number ${await text('[data-num]')}`);
 check(/0/.test(await text('[data-bag-count]') || ''), 'confirmation: bag cleared');
 
-await go('/index.html');
+await go('/index.html?intro=0');
 await click('[data-open="search"]'); await new Promise((r) => setTimeout(r, 500));
 await page.type('#search-input', 'hodie'); await new Promise((r) => setTimeout(r, 600));
 check((await page.$$('[data-results] .tile')).length >= 3, `search: typo "hodie" found ${(await page.$$('[data-results] .tile')).length} hoodies`);
@@ -68,8 +68,29 @@ check(await page.$('[data-empty]') !== null, 'wishlist: renders');
 await go('/ueber-chiemsee.html');
 check((await page.$$('.prose')).length >= 2, 'about: renders');
 
+// --- the opening frame: the old shop, then the hand-over to the store ---
+await go('/index.html?intro=1');
+check(await page.$('.oldshop') !== null, 'intro: the old-shop opening frame is shown');
+check(await page.$eval('.os-hero-word', (e) => e.textContent.trim()) === 'Fleece', 'intro: hero reads FLEECE, as chiemsee.com does');
+check((await page.$$('.os-promo figure')).length === 3, 'intro: three promo tiles');
+await new Promise((r) => setTimeout(r, 7500));
+check(await page.$('.oldshop') === null, 'intro: hands over to the store when the timer ends');
+check(await page.$('.os-wipe') === null, 'intro: the wipe cleans itself up');
+check(await page.evaluate(() => !document.body.style.overflow), 'intro: page scrolling is restored');
+check((await page.$$('[data-row="new"] .tile')).length >= 4, 'intro: the store underneath is intact');
+
+await go('/index.html?intro=1');
+await new Promise((r) => setTimeout(r, 600));
+await click('[data-skip]');
+await new Promise((r) => setTimeout(r, 2200));
+check(await page.$('.oldshop') === null, 'intro: the skip button hands over early');
+
+await go('/index.html?intro=0');
+await new Promise((r) => setTimeout(r, 400));
+check(await page.$('.oldshop') === null, 'intro: ?intro=0 skips it entirely');
+
 await page.setViewport({ width: 390, height: 844 });
-await go('/index.html');
+await go('/index.html?intro=0');
 check(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'phone: no horizontal overflow on home');
 await go('/shop.html?cat=damen');
 check(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'phone: no horizontal overflow on shop');

@@ -54,6 +54,18 @@ JTR site runs on Cloudflare Pages).
 | Wishlist | `wishlist.html` | Hearted products |
 | About | `ueber-chiemsee.html` | Brand page, since 1982 |
 
+## The opening frame
+
+The home page opens on a replica of **chiemsee.com as it stands today** — the real hero, nav, promo tiles and
+autumn band, in Nunito Sans at the site's own colours. It holds for five seconds behind a countdown, then a
+six-column wipe hands over to this store.
+
+The hand-over is an overlay teardown, not a navigation: the store is mounted underneath from the first frame,
+so there is no page that can fail to load. Three independent paths end it — the animation finishing, a hard
+watchdog timer, or the viewer pressing Esc or "Direkt zum Shop" — and all three run the same idempotent
+teardown, so it cannot strand anyone on the old shop. It plays once per browser session; `?intro=1` replays it
+and `?intro=0` skips it.
+
 Search is a full-page overlay available on every page (the "Suche" link, or the `/` key). It is typo-tolerant:
 "hodie" finds the hoodies.
 
