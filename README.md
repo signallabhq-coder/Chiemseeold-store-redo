@@ -56,10 +56,10 @@ JTR site runs on Cloudflare Pages).
 
 ## The campaign hero
 
-The home page opens on **chiemsee.com's own campaign hero**, carried over slide for slide: Fall Essentials,
-Troyer, Fleece, on their 1920x920 banner artwork, in their type (Nunito Sans, vendored) and their colours —
-the green over the banner and their `#1E1E1E` ink. It is a copy, not a restyle, so the redesign's palette is
-deliberately kept out of this block.
+The home page opens on **chiemsee.com's campaign hero**, carried over slide for slide: Fall Essentials,
+Troyer, Fleece, on their 1920x920 banner artwork — but wearing this store's clothes. Hanken Grotesk at weight
+400, `--t-hero` over `--paper`, the shared `.btn` component, and `--hydro` as the single accent under the
+active page number. Their photography, our type and palette.
 
 The slider auto-advances every five seconds. The switch is a class swap plus a CSS opacity transition, so it
 never depends on an animation callback firing. The clock restarts on every manual move, pauses on hover and
@@ -67,8 +67,9 @@ focus so nobody loses the copy mid-read, and stops while the tab is hidden — a
 timers, and without that you return to a carousel that has silently skipped ahead. Arrows, pagination and the
 left/right arrow keys all move it. Under `prefers-reduced-motion` it stays put and waits for the viewer.
 
-Their banner art alternates light and dark, so each slide carries its own tone: the call to action and the
-slider controls flip to white on the Fleece slide, exactly as they do on the live site.
+Their banner art runs from near-white to near-black, so the ground under the copy comes from a scrim rather
+than from the photograph — the same treatment the rest of the site uses, and it means the copy reads the same
+on all three slides.
 
 Search is a full-page overlay available on every page (the "Suche" link, or the `/` key). It is typo-tolerant:
 "hodie" finds the hoodies.

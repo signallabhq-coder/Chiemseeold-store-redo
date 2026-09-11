@@ -37,9 +37,6 @@ export function mountHero(root = document.querySelector('[data-hero]')) {
       const link = s.querySelector('a');
       if (link) link.tabIndex = on ? 0 : -1;
     });
-    /* their banner art alternates light and dark; the CTA and the slider
-       controls have to flip with it or they vanish into the photo */
-    root.dataset.tone = slides[i].dataset.tone || 'light';
     dots.forEach((d, k) => {
       d.classList.toggle('is-active', k === i);
       d.setAttribute('aria-current', k === i ? 'true' : 'false');

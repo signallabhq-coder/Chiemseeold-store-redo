@@ -75,6 +75,10 @@ const activeWord = () => page.$eval('.cs-slide.is-active .cs-word', (e) => e.tex
 check(await activeWord() === 'Fall Essentials', `hero: opens on ${await activeWord()}`);
 check(await page.$eval('.cs-slide.is-active img', (e) => e.currentSrc.includes('fall-women-hoodie')), 'hero: shows their banner artwork, not the windsurfer');
 check(await page.$('.hero-img') === null, 'hero: the old windsurf hero is gone');
+const heroType = await page.$eval('.cs-word', (e) => { const c = getComputedStyle(e); return `${c.fontFamily.split(',')[0].replace(/"/g, '')}|${c.fontWeight}|${c.color}`; });
+check(heroType === 'Hanken Grotesk|400|rgb(255, 255, 255)', `hero: uses the store's own type and palette (${heroType})`);
+check((await page.$$('.cs-copy .btn.btn-paper')).length === 3, 'hero: each slide uses the shared button');
+check((await page.$$('.cs-scrim')).length === 3, 'hero: every slide carries the scrim');
 await new Promise((r) => setTimeout(r, 6000));
 check(await activeWord() === 'Troyer', `hero: auto-advances on its own (now ${await activeWord()})`);
 await new Promise((r) => setTimeout(r, 5600));
