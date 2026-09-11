@@ -54,17 +54,21 @@ JTR site runs on Cloudflare Pages).
 | Wishlist | `wishlist.html` | Hearted products |
 | About | `ueber-chiemsee.html` | Brand page, since 1982 |
 
-## The opening frame
+## The campaign hero
 
-The home page opens on a replica of **chiemsee.com as it stands today** — the real hero, nav, promo tiles and
-autumn band, in Nunito Sans at the site's own colours. It holds for five seconds behind a countdown, then a
-six-column wipe hands over to this store.
+The home page opens on **chiemsee.com's own campaign hero**, carried over slide for slide: Fall Essentials,
+Troyer, Fleece, on their 1920x920 banner artwork, in their type (Nunito Sans, vendored) and their colours —
+the green over the banner and their `#1E1E1E` ink. It is a copy, not a restyle, so the redesign's palette is
+deliberately kept out of this block.
 
-The hand-over is an overlay teardown, not a navigation: the store is mounted underneath from the first frame,
-so there is no page that can fail to load. Three independent paths end it — the animation finishing, a hard
-watchdog timer, or the viewer pressing Esc or "Direkt zum Shop" — and all three run the same idempotent
-teardown, so it cannot strand anyone on the old shop. It plays once per browser session; `?intro=1` replays it
-and `?intro=0` skips it.
+The slider auto-advances every five seconds. The switch is a class swap plus a CSS opacity transition, so it
+never depends on an animation callback firing. The clock restarts on every manual move, pauses on hover and
+focus so nobody loses the copy mid-read, and stops while the tab is hidden — a backgrounded tab throttles
+timers, and without that you return to a carousel that has silently skipped ahead. Arrows, pagination and the
+left/right arrow keys all move it. Under `prefers-reduced-motion` it stays put and waits for the viewer.
+
+Their banner art alternates light and dark, so each slide carries its own tone: the call to action and the
+slider controls flip to white on the Fleece slide, exactly as they do on the live site.
 
 Search is a full-page overlay available on every page (the "Suche" link, or the `/` key). It is typo-tolerant:
 "hodie" finds the hoodies.

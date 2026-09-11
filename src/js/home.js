@@ -1,9 +1,9 @@
 import { loadCatalog, mountChrome } from './store.js';
 import { tileHTML, bindTiles, alignCaptions } from './tile.js';
 import { mountSearch } from './search.js';
-import { mountOldShop } from './oldshop.js';
+import { mountHero } from './hero.js';
 
-mountOldShop();
+mountHero();
 mountChrome();
 mountSearch();
 bindTiles();

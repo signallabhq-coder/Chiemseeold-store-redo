@@ -23,7 +23,7 @@ for (let i = 0; i < 40; i++) {
   try { await page.goto(base + '/index.html', { timeout: 3000 }); break; } catch { await new Promise((r) => setTimeout(r, 1000)); }
 }
 
-await go('/index.html?intro=0');
+await go('/index.html');
 check((await page.$$('[data-row="new"] .tile')).length >= 4, 'home: Neu row has products');
 check((await page.$$('[data-row="sale"] .tile')).length >= 4, 'home: Sale row has products');
 check((await page.$$('.entry')).length === 3, 'home: three category entries');
@@ -58,7 +58,7 @@ current = '/confirmation.html';
 check(/CH-/.test(await text('[data-num]') || ''), `confirmation: order number ${await text('[data-num]')}`);
 check(/0/.test(await text('[data-bag-count]') || ''), 'confirmation: bag cleared');
 
-await go('/index.html?intro=0');
+await go('/index.html');
 await click('[data-open="search"]'); await new Promise((r) => setTimeout(r, 500));
 await page.type('#search-input', 'hodie'); await new Promise((r) => setTimeout(r, 600));
 check((await page.$$('[data-results] .tile')).length >= 3, `search: typo "hodie" found ${(await page.$$('[data-results] .tile')).length} hoodies`);
@@ -68,32 +68,27 @@ check(await page.$('[data-empty]') !== null, 'wishlist: renders');
 await go('/ueber-chiemsee.html');
 check((await page.$$('.prose')).length >= 2, 'about: renders');
 
-// --- the opening frame: the old shop, then the hand-over to the store ---
-await go('/index.html?intro=1');
-check(await page.$('.oldshop') !== null, 'intro: the old-shop opening frame is shown');
-check(await page.$eval('.os-hero-word', (e) => e.textContent.trim()) === 'Fall Essentials', 'intro: hero reads FALL ESSENTIALS, as chiemsee.com does');
-check((await page.$$('.os-nav a')).length === 6, 'intro: six nav items incl. Windsurf World Cup 2026');
-check((await page.$$('.os-utils svg')).length === 4, 'intro: search / wishlist / bag / account icons');
-check(await page.$('.os-gift-badge') !== null, 'intro: the rewards button with its badge');
-check((await page.$$('.os-promo figure')).length === 3, 'intro: three promo tiles');
-await new Promise((r) => setTimeout(r, 7500));
-check(await page.$('.oldshop') === null, 'intro: hands over to the store when the timer ends');
-check(await page.$('.os-wipe') === null, 'intro: the wipe cleans itself up');
-check(await page.evaluate(() => !document.body.style.overflow), 'intro: page scrolling is restored');
-check((await page.$$('[data-row="new"] .tile')).length >= 4, 'intro: the store underneath is intact');
-
-await go('/index.html?intro=1');
-await new Promise((r) => setTimeout(r, 600));
-await click('[data-skip]');
-await new Promise((r) => setTimeout(r, 2200));
-check(await page.$('.oldshop') === null, 'intro: the skip button hands over early');
-
-await go('/index.html?intro=0');
-await new Promise((r) => setTimeout(r, 400));
-check(await page.$('.oldshop') === null, 'intro: ?intro=0 skips it entirely');
+// --- the campaign hero carried over from chiemsee.com ---
+await go('/index.html');
+check((await page.$$('.cs-hero [data-slide]')).length === 3, 'hero: three campaign slides');
+const activeWord = () => page.$eval('.cs-slide.is-active .cs-word', (e) => e.textContent.trim()).catch(() => null);
+check(await activeWord() === 'Fall Essentials', `hero: opens on ${await activeWord()}`);
+check(await page.$eval('.cs-slide.is-active img', (e) => e.currentSrc.includes('fall-women-hoodie')), 'hero: shows their banner artwork, not the windsurfer');
+check(await page.$('.hero-img') === null, 'hero: the old windsurf hero is gone');
+await new Promise((r) => setTimeout(r, 6000));
+check(await activeWord() === 'Troyer', `hero: auto-advances on its own (now ${await activeWord()})`);
+await new Promise((r) => setTimeout(r, 5600));
+check(await activeWord() === 'Fleece', `hero: keeps advancing (now ${await activeWord()})`);
+await click('[data-dot="0"]');
+await new Promise((r) => setTimeout(r, 800));
+check(await activeWord() === 'Fall Essentials', 'hero: the pagination jumps to a slide');
+await click('[data-next]');
+await new Promise((r) => setTimeout(r, 800));
+check(await activeWord() === 'Troyer', 'hero: the arrow steps forward');
+check(await page.$eval('.cs-dots button.is-active', (e) => e.textContent.trim()) === '02', 'hero: pagination tracks the slide');
 
 await page.setViewport({ width: 390, height: 844 });
-await go('/index.html?intro=0');
+await go('/index.html');
 check(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'phone: no horizontal overflow on home');
 await go('/shop.html?cat=damen');
 check(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), 'phone: no horizontal overflow on shop');
