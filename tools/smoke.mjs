@@ -71,7 +71,10 @@ check((await page.$$('.prose')).length >= 2, 'about: renders');
 // --- the opening frame: the old shop, then the hand-over to the store ---
 await go('/index.html?intro=1');
 check(await page.$('.oldshop') !== null, 'intro: the old-shop opening frame is shown');
-check(await page.$eval('.os-hero-word', (e) => e.textContent.trim()) === 'Fleece', 'intro: hero reads FLEECE, as chiemsee.com does');
+check(await page.$eval('.os-hero-word', (e) => e.textContent.trim()) === 'Fall Essentials', 'intro: hero reads FALL ESSENTIALS, as chiemsee.com does');
+check((await page.$$('.os-nav a')).length === 6, 'intro: six nav items incl. Windsurf World Cup 2026');
+check((await page.$$('.os-utils svg')).length === 4, 'intro: search / wishlist / bag / account icons');
+check(await page.$('.os-gift-badge') !== null, 'intro: the rewards button with its badge');
 check((await page.$$('.os-promo figure')).length === 3, 'intro: three promo tiles');
 await new Promise((r) => setTimeout(r, 7500));
 check(await page.$('.oldshop') === null, 'intro: hands over to the store when the timer ends');

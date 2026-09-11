@@ -31,8 +31,16 @@ const markSeen = () => {
   try { sessionStorage.setItem(SEEN_KEY, '1'); } catch { /* private mode — replay is harmless */ }
 };
 
-/* chiemsee.com's own words, kept verbatim so the frame reads as the real shop. */
-const HERO = { brand: 'Chiemsee', word: 'Fleece', cta: 'Explore now' };
+/* chiemsee.com's own words, kept verbatim so the frame reads as the real shop.
+   Slide 01 of their hero carousel: the Fall Essentials banner, whose three-photo
+   composition is baked into the 1920x920 artwork itself. */
+const HERO = {
+  brand: 'Chiemsee',
+  word: 'Fall Essentials',
+  cta: 'New in',
+  img: 'assets/campaign/fall-women-hoodie.jpg'
+};
+const NAV = ['Damen', 'Herren', 'Kinder', 'Accessoires', 'Outlet', 'Windsurf World Cup 2026'];
 const PROMOS = [
   { img: 'assets/campaign/promo-muetzen.jpg', cap: 'Chiemsee Mützen' },
   { img: 'assets/campaign/promo-herren-shirts.jpg', cap: 'Herren Shirts &amp; Tanks' },
@@ -47,14 +55,20 @@ const BAND = {
 const ICONS = {
   ig: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.6-1.6 1.5 1.5 0 0 1 1.6 1.6z"/></svg>',
   fb: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.3-1.5 1.6-1.5h1.6V3.6A22 22 0 0 0 14.4 3C12 3 10.4 4.4 10.4 7.1v2.8H7.7V13h2.7v8z"/></svg>',
-  yt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>'
+  yt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8A26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>',
+  /* the utility row at the right of their nav */
+  search: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.3 4.7 13a4.6 4.6 0 1 1 6.5-6.5l.8.8.8-.8A4.6 4.6 0 1 1 19.3 13z"/></svg>',
+  bag: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l1 13H4zM9 7V5.5a3 3 0 0 1 6 0V7"/></svg>',
+  user: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg>',
+  gift: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3.5 11h17v9.5h-17zM2.5 7.2h19V11h-19zM12 7.2v13.3"/><path d="M12 7.2S10.6 3 8.3 3a2.1 2.1 0 0 0 0 4.2zM12 7.2S13.4 3 15.7 3a2.1 2.1 0 0 1 0 4.2z"/></svg>'
 };
 
 function frameHTML() {
   return `
   <div class="os-strip">✨ <u>Werde Teil der Chiemsee Family</u> ✨</div>
   <div class="oldshop-scroll">
-    <div class="os-hero" style="background-image:url('assets/campaign/fall-men-fleece.jpg')">
+    <div class="os-hero" style="background-image:url('${HERO.img}')">
       <div class="os-follow">
         <span class="os-follow-label">Follow us</span>
         <span class="os-rule-v"></span>
@@ -66,7 +80,8 @@ function frameHTML() {
         <span class="os-hero-cta">${HERO.cta} &nbsp;&rarr;</span>
       </div>
       <div class="os-arrows"><span>&larr;</span><span>&rarr;</span></div>
-      <div class="os-dots"><span>01</span><span>02</span><b>03</b><span class="os-rule"></span></div>
+      <div class="os-dots"><b>01</b><span class="os-rule"></span><span>02</span><span>03</span></div>
+      <button class="os-gift" type="button" tabindex="-1">${ICONS.gift}<span class="os-gift-badge">1</span></button>
     </div>
 
     <div class="os-promo">
@@ -90,9 +105,8 @@ function frameHTML() {
 
   <div class="os-head">
     <span class="os-mark">Chiemsee</span>
-    <nav class="os-nav"><a>Damen</a><a>Herren</a><a>Kinder</a><a>Accessoires</a><a>Outlet</a></nav>
-    <span></span>
-    <span class="os-cup">Windsurf World Cup 2026</span>
+    <nav class="os-nav">${NAV.map((n) => `<a>${n}</a>`).join('')}</nav>
+    <span class="os-utils">${ICONS.search}${ICONS.heart}${ICONS.bag}${ICONS.user}</span>
   </div>`;
 }
 
