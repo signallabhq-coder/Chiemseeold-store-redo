@@ -13,7 +13,7 @@
  * silently skipped several slides.
  */
 
-const DWELL_MS = 5000;
+const DWELL_MS = 3500;
 
 export function mountHero(root = document.querySelector('[data-hero]')) {
   if (!root) return;

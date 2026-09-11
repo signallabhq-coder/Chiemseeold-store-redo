@@ -61,7 +61,7 @@ Troyer, Fleece, on their 1920x920 banner artwork — but wearing this store's cl
 400, `--t-hero` over `--paper`, the shared `.btn` component, and `--hydro` as the single accent under the
 active page number. Their photography, our type and palette.
 
-The slider auto-advances every five seconds. The switch is a class swap plus a CSS opacity transition, so it
+The slider auto-advances every 3.5 seconds. The switch is a class swap plus a CSS opacity transition, so it
 never depends on an animation callback firing. The clock restarts on every manual move, pauses on hover and
 focus so nobody loses the copy mid-read, and stops while the tab is hidden — a backgrounded tab throttles
 timers, and without that you return to a carousel that has silently skipped ahead. Arrows, pagination and the

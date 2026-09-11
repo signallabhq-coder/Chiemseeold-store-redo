@@ -79,9 +79,9 @@ const heroType = await page.$eval('.cs-word', (e) => { const c = getComputedStyl
 check(heroType === 'Hanken Grotesk|400|rgb(255, 255, 255)', `hero: uses the store's own type and palette (${heroType})`);
 check((await page.$$('.cs-copy .btn.btn-paper')).length === 3, 'hero: each slide uses the shared button');
 check((await page.$$('.cs-scrim')).length === 3, 'hero: every slide carries the scrim');
-await new Promise((r) => setTimeout(r, 6000));
+await new Promise((r) => setTimeout(r, 4300));
 check(await activeWord() === 'Troyer', `hero: auto-advances on its own (now ${await activeWord()})`);
-await new Promise((r) => setTimeout(r, 5600));
+await new Promise((r) => setTimeout(r, 4000));
 check(await activeWord() === 'Fleece', `hero: keeps advancing (now ${await activeWord()})`);
 await click('[data-dot="0"]');
 await new Promise((r) => setTimeout(r, 800));
