@@ -32,9 +32,11 @@ school or office firewall.
 `npm run build` produces a fully static `dist/`. Every path it emits is relative (`base: './'`), so the same
 build works at a domain root **and** inside a subfolder.
 
-**GitHub Pages** is wired up: `.github/workflows/deploy-pages.yml` builds and publishes on every push to
-`main`. It needs one setting turned on once, in the repository under Settings -> Pages -> Source:
-"GitHub Actions". The site then lives at `https://signallabhq-coder.github.io/Chiemseeold-store-redo/`.
+**The site is live at https://signallabhq-coder.github.io/Chiemseeold-store-redo/** and updates itself.
+`.github/workflows/deploy-pages.yml` builds on every push to `main` and copies `dist/` onto the `gh-pages`
+branch, which is what Pages serves (Settings -> Pages -> Deploy from a branch: `gh-pages` / root). It commits
+only when the build actually changed, and it reuses the published branch's history so each deploy uploads a
+diff rather than the whole 127 MB of imagery.
 
 Any other static host works too, with build command `npm run build` and output directory `dist` (the sibling
 JTR site runs on Cloudflare Pages).

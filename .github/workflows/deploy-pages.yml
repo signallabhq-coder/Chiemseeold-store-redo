@@ -1,5 +1,5 @@
-# Builds the site and publishes it to GitHub Pages on every push to main.
-# One-time setup in the repository: Settings -> Pages -> Source: "GitHub Actions".
+# Builds the site on every push to main and publishes it to the gh-pages branch,
+# which is what GitHub Pages serves (Settings -> Pages -> Deploy from a branch: gh-pages / root).
 name: Deploy to GitHub Pages
 
 on:
@@ -8,36 +8,50 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
       - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      # Fetch the published branch so the commit is a diff, not a fresh 127 MB upload.
+      - name: Check out the published branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=1 origin gh-pages; then
+            git worktree add out gh-pages
+          else
+            git worktree add --orphan -b gh-pages out
+          fi
+
+      - name: Copy the build over it
+        run: |
+          rsync -a --delete --exclude .git dist/ out/
+          touch out/.nojekyll
+
+      - name: Commit and push if anything changed
+        run: |
+          cd out
+          git add -A
+          if git diff --quiet --cached; then
+            echo "No change in the built site; nothing to publish."
+          else
+            git commit -q -m "Build from ${GITHUB_SHA::7}"
+            git push origin gh-pages
+            echo "Published ${GITHUB_SHA::7} to gh-pages."
+          fi
